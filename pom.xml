@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+    </parent>
+
+    <groupId>com.p2mj</groupId>
+    <artifactId>minPerson</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+ <!--
+ 2.1.1:从第 章的介绍中读者了解到在向 pom.xml 文件中添加依赖之前需要先添加 spring-boot
+starter par nt spring boot-starter-parent 主要提供了如下默认配置
+• Java 版本默认使用 1.8
+• 编码格式默认使用 UTF-8.
+• 提供 Dependency Management 进行项目依赖的版本管理
+• 默认的资源过滤与插件配直
+spring-boot-starter-parent 虽然方便，但是读者在公司中开发微服务项目或者多模块项目时一般
+需要使用公司自己的 arent 这个时候如果还想进行项目依赖版本的统一管理，就需要使用
+dependencyManag ment 来实现了。添加如下代码到 pom.xm 文件中
+ -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.0.4.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+    <!--当然，Spring Boot 应用也可以直接打成 jar 包运行。在生产环境中 ，也可以通过这样的方式来
+     运行一个 Spring Boot 应用。要将 SpringBoot 打成 jar 运行，首先需要添加一个plugin到pom.xm
+    文件中，-->
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--
+              2.1.2:此时，就可以不用继承 spring-bo ot starter-parent 了，但是 Java 的版本、编码的格式 需要
+             开发者手动配置。 Java 版本的配置很简单，添加一个 plugin 即可：
+               -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
